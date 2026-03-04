@@ -1,22 +1,23 @@
 pipeline {
-agent any
+    agent any
 
-stages {
+    stages {
+        stage('Clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Rachelferns/File-Encrypter.git'
+            }
+        }
 
- stage('Clone') {
-  steps {
-   git branch: 'main', url: 'https://github.com/Fazil711/File-Encrypter.git'
-  } }
-
- stage('Build') {
-  steps {
-   sh '''
-   echo "Building Java project..."
-   ls
-   cd "Password Protection"
-   mkdir -p build
-   javac -d build src/*.java
-   echo "Build successful"
-   '''
-  }}}}
-
+        stage('Build') {
+            steps {
+                sh '''
+                echo "Building Java project..."
+                cd "Password Protection"
+                mkdir -p build
+                javac -d build src/*.java
+                echo "Build successful"
+                '''
+            }
+        }
+    }
+}
